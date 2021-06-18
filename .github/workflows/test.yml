@@ -14,11 +14,15 @@ jobs:
       - shell: bash
         run: |
           curl --show-error -d {} "https://tetsudo.rti-giken.jp/free/delay.json" > data/delay.json
-      
       - name: Commit files
         run: |
           gut config --local user.email ${{ secrets.GIT_USER_MAIL }}
           git config --local user.name "test"
           git add .
           git commit -m "Add changes" -a
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           
