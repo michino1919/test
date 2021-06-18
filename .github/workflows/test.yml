@@ -1,8 +1,8 @@
-name: CI
+name: delay
 
 on:
-  push:
-      branches: [ master ]
+  schedule:
+  - cron: '30 * * * *'
 
 jobs:
   build:
@@ -10,5 +10,16 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: Run a one-line script
-        run: echo Hello, world!
+      
+      - shell: bash
+        env:
+          run: |
+              curl --show-error -d {} "https://tetsudo.rti-giken.jp/free/delay.json" > data/delay.json
+      
+      - name: Commit files
+        run: |
+          gut config --local user.email ${{ secrets.GIT_USER_MAIL }}
+          git config --local user.name "test"
+          git add .
+          git commit -m "Add changes" -a
+          
