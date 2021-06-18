@@ -13,7 +13,7 @@ jobs:
       
       - shell: bash
         run: |
-          curl --show-error -d {} "https://tetsudo.rti-giken.jp/free/delay.json" > data/delay.json
+          curl --show-error "https://tetsudo.rti-giken.jp/free/delay.json" > data/delay.json
       - name: Commit files
         run: |
           git config --local user.email ${{ secrets.GIT_USER_MAIL }}
