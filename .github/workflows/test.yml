@@ -12,9 +12,8 @@ jobs:
       - uses: actions/checkout@v2
       
       - shell: bash
-        env:
-          run: |
-              curl --show-error -d {} "https://tetsudo.rti-giken.jp/free/delay.json" > data/delay.json
+        run: |
+          curl --show-error -d {} "https://tetsudo.rti-giken.jp/free/delay.json" > data/delay.json
       
       - name: Commit files
         run: |
